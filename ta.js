@@ -1,9 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const button = document.getElementById("clickBtn");
-    const message = document.getElementById("message");
+    homeButton = document.getElementById("homeBtn");
+    homeButton.addEventListener("click", function () {
+        window.location.href = "taHome.html";
+    });
 
-    button.addEventListener("click", function () {
-        const now = new Date();
-        message.textContent = "Button clicked at: " + now.toLocaleTimeString();
+    faqButton = document.getElementById("faqBtn");
+    faqButton.addEventListener("click", function () {
+        window.location.href = "taFaqPosts.html";
+    });
+
+    feedbackButton = document.getElementById("feedbackBtn");
+    feedbackButton.addEventListener("click", function () {
+        window.location.href = "taFeedback.html";
+    });
+
+    signOutButton = document.getElementById("signOutBtn");
+    signOutButton.addEventListener("click", function () {
+        window.location.href = "tempSignOut.html";
+    });
+
+    settingsButton = document.getElementById("settingsBtn");
+    settingsButton.addEventListener("click", function () {
+        window.location.href = "taSettings.html";
     });
 });
