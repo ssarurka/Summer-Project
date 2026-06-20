@@ -1,0 +1,72 @@
+<!-- May need ids for all elements: add later -->
+<!-- Need to add the account circle and logo once developed at the right corner -->
+<!-- Change nav bar with Abby's once done -->
+<!-- Do we want voice search? need to add mic to search bar in that case -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Frontend First Project</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <main class="app-container">
+        <div class="card">
+            <search>
+                <form action="/search-page" method="GET" class="search-container">
+                    <label hidden for="site-search">Search our website:</label>
+                    <input type="search" id="site-search" name="q" placeholder="Search for classes" aria-label="Search through site content">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </search>
+        </div>
+
+        <!-- Need to update with code once backend is up: remove hardcoded values -->
+
+        <div class="card chart-card">
+            <h3>Busy Hours</h3>
+            <div style="position: right; height: 250px; width:100%;">
+                <canvas id="Histogram"></canvas>
+            </div>
+        </div>
+
+        <div id="sideNav" class="side-nav">
+            <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+            <a href="#">&#8962 Home</a>
+            <a href="#">Classes</a>
+            <a href="#">Notifications</a>
+            <a href="#">FAQ</a>
+        </div>
+
+        <div id="main">
+            <span id="menuBtn" class="menu-icon" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        </div>
+
+        <!-- Need to update with actual values once database is up: remove hardcoded values -->
+
+        <table id="timeTable" class="time-table">
+            <tr>
+                <th><input type="text" style="font-size: 13px;" placeholder="Enter Date for Timings"></th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>8:30 AM</td>
+                <td>DSAI B079</td>
+                <td>FULL</td>
+            </tr>
+        </table>
+       
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
