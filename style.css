@@ -84,7 +84,7 @@ button:hover {
     min-height: 100vh
 }
 
-.nav-btn {
+.nav_btn {
     background: #ffffff;
     color: #cfb991;
     border: none;
@@ -94,19 +94,19 @@ button:hover {
     width: 100%;
 }
 
-.nav-btn:hover {
+.nav_btn:hover {
     background: #eaeaea;
     color: #cfb991;
 }
 
-.top-bar {
+.top_bar {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
     width: 100%;
 }
 
-.line-spot {
+.line_spot {
     background-color: #cfb991; 
     border-radius: 25px;      
     padding: 20px;
@@ -120,14 +120,14 @@ button:hover {
     position: relative;
 }
 
-.line-header {
+.line_header {
     display: flex;
     align-items: center;
     position: relative;
     width: 100%;
 }
 
-.line-number {
+.line_number {
     background-color: white;
     padding: 6px 12px;
     border-radius: 8px;
@@ -135,27 +135,27 @@ button:hover {
     font-weight: bold;
 }
 
-.line-name {
+.line_name {
     font-size: 1.4rem;
     position: absolute;
     left: 50%;
     transform: translateX(-50%); 
 }
 
-.lime-body {
+.line_body {
     font-size: 1.25rem;
     line-height: 1.4;
     text-align: left;
     margin: 0;
 }
 
-.line-footer {
+.line_footer {
     display: flex;
     justify-content: flex-end; 
     width: 100%;
 }
 
-.remove-btn {
+.remove_btn {
     background-color: #ff2134; 
     border: none;
     font-family: 'Times New Roman', Times, serif;
@@ -168,11 +168,11 @@ button:hover {
     right: 20px;
 }
 
-.remove-btn:hover {
+.remove_btn:hover {
     background-color: #d11222;
 }
 
-.line-container {
+.line_container {
     display: flex;         
     flex-direction: row;   
     flex-wrap: wrap;       
@@ -180,29 +180,29 @@ button:hover {
     width: 100%;   
 }
 
-.scroll-zone {
+.scroll_zone {
     flex-grow: 1;
     overflow-y: auto;
     padding-right: 5px;
 }
 
-.nav-settings {
+.nav_settings {
     margin-top: auto;
     margin-bottom: 25px;
 }
 
-.section-title {
+.section_title {
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.4rem;
     margin: 0 0 10px 0;
 }
 
-.new-faq-container {
+.new_faq_container {
     width: 100%;
     margin-bottom: 5px;
 }
 
-.faq-input {
+.faq_input {
     width: 100%;
     height: 150px;
     background-color: #cfb991; 
@@ -216,13 +216,13 @@ button:hover {
     outline: none;
 }
 
-.post-btn-wrapper {
+.post_btn_wrapper {
     display: flex;
     justify-content: center;
     margin-top: 5px;
 }
 
-.post-btn {
+.post_btn {
     background-color: #00b074; 
     border: none;
     font-family: 'Times New Roman', Times, serif;
@@ -233,11 +233,11 @@ button:hover {
     cursor: pointer;
 }
 
-.post-btn:hover {
+.post_btn:hover {
     background-color: #008f5e;
 }
 
-.recent-faq-container {
+.recent_faq_container {
     background-color: #cfb991;
     border-radius: 25px;
     padding: 20px;
@@ -246,7 +246,7 @@ button:hover {
     flex-direction: column;
 }
 
-.faq-item {
+.faq_item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -254,11 +254,11 @@ button:hover {
     border-bottom: 2px dotted #a39171;
 }
 
-.faq-item:last-child {
+.faq_item:last-child {
     border-bottom: none;
 }
 
-.remove-btn-static {
+.remove_btn_static {
     background-color: #ff2134;
     color: white;
     border: none;
@@ -271,6 +271,6 @@ button:hover {
     flex-shrink: 0;
 }
 
-.remove-btn-static:hover {
+.remove_btn_static:hover {
     background-color: #d11222;
 }

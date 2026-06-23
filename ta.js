@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     faqInput = document.getElementById("faqInput");
     postBtn = document.getElementById("postBtn");
-    recentFaqContainer = document.querySelector(".recent-faq-container");
+    recentFaqContainer = document.querySelector(".recent_faq_container");
     if (postBtn && faqInput && recentFaqContainer) {
         postBtn.addEventListener("click", function () {
             textValue = faqInput.value.trim();
@@ -35,16 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
             newFaqItem = document.createElement("div");
-            newFaqItem.className = "faq-item";
+            newFaqItem.className = "faq_item";
             newFaqItem.innerHTML = `
-                <div class="faq-content-skeleton">
+                <div class="faq_content_skeleton">
                     <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.1rem; margin: 0; text-align: left;">
                         ${textValue}
                     </p>
                 </div>
-                <button class="remove-btn-static">REMOVE</button>
+                <button class="remove_btn_static">REMOVE</button>
             `;
-            removeBtn = newFaqItem.querySelector(".remove-btn-static");
+            removeBtn = newFaqItem.querySelector(".remove_btn_static");
             removeBtn.addEventListener("click", function () {
                 newFaqItem.remove();
             });
@@ -52,10 +52,10 @@ document.addEventListener("DOMContentLoaded", function () {
             faqInput.value = "";
         });
     }
-    existingRemoveButtons = document.querySelectorAll(".remove-btn-static");
+    existingRemoveButtons = document.querySelectorAll(".remove_btn_static");
     existingRemoveButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
-            rowItem = event.target.closest(".faq-item");
+            rowItem = event.target.closest(".faq_item");
             if (rowItem) {
                 rowItem.remove();
             }
