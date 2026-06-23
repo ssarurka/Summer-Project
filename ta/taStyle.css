@@ -186,3 +186,172 @@ button:hover {
     margin-top: auto;
     margin-bottom: 25px;
 }
+
+.feedback-card {
+    background: #cfb991;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    width: 1150px;
+    height: 575px;
+    top: 70px;
+}
+
+.feedback-header {
+    top: 35px;
+}
+
+.card {
+    background: #cfb991;
+    position: absolute;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    margin-top: 15px;
+    width: 1150px;
+    height: 295px;
+    top: 50px;
+    left: 140px;
+}
+
+.curr-hours-card {
+    background: #a6a6a6;
+    position: absolute;
+    padding: 25px;
+    border-radius: 12px;
+    width: 1100px;
+    height: 10px;
+    left: 25px;
+    top: 45px;
+}
+
+.new-hours-card {
+    background: #a6a6a6;
+    position: absolute;
+    padding: 25px;
+    border-radius: 12px;
+    width: 1100px;
+    height: 100px;
+    left: 25px;
+    top: 135px;
+}
+
+h3 {
+    position: absolute;
+    top: 10px;
+}
+
+.new-header {
+    position: absolute;
+    top: 105px;
+}
+
+.submit-button {
+    background-color: #00bf63; 
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 13px;
+    right: 523px;
+}
+
+.submit-button:hover {
+    background-color: #00a656
+}
+
+.class-card {
+    background: #cfb991;
+    position: absolute;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    margin-top: 15px;
+    width: 800px;
+    height: 210px;
+    top: 410px;
+    left: 140px;
+}
+
+.classes-header {
+    position: absolute;
+    top: 375px;
+}
+
+.modify-hours {
+    position: absolute;
+    top: 15px;
+}
+
+.curr-class-header {
+    position: absolute;
+    top: 10px;
+}
+
+.curr-classes {
+    background: #a6a6a6;
+    position: absolute;
+    padding: 25px;
+    border-radius: 12px;
+    width: 575px;
+    height: 72px;
+    left: 25px;
+    top: 40px;
+}
+
+.remove-btn-2 {
+    background-color: #ff2134; 
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 115px;
+    right: 70px;
+}
+
+.remove-btn-2:hover {
+    background-color: #d11222;
+}
+
+.add-class-header{
+    position: absolute;
+    top: 115px;
+}
+
+.new-class {
+    position: absolute;
+    padding: 25px;
+    border-radius: 12px;
+    width: 250px;
+    height: 10px;
+    top: 142px;
+}
+
+.enter-button-2 {
+    background-color: #00bf63; 
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+    right: 425px;
+}
+
+.enter-button-2:hover {
+    background-color: #00a656
+}
+
+
+
+
+

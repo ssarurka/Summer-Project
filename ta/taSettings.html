@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Hours</title>
+    <link rel="stylesheet" href="taStyle.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li><button class="nav-btn" id="homeBtn">Home</button></li>
+                <li><button class="nav-btn" id="faqBtn">FAQ Posts</button></li>
+                <li><button class="nav-btn" id="feedbackBtn">Feedback</button></li>
+                <li class="nav-settings"><button class="nav-btn" id="settingsBtn">Settings</button></li>
+            </ul>            
+        </nav>
+        <main>
+            <header>
+                <div class="top-bar">
+                    <button id="signOutBtn">Sign Out</button>
+                </div>
+            </header>
+            <h2 class="modify-hours">Modify Hours</h2>
+            <div class="card">
+                <h3>Current Hours</h3>
+                <div class="curr-hours-card">Your current hours</div>
+                <h3 class="new-header">New Hours</h3>
+                <div class="new-hours-card">Add Hours</div>
+                <button class="submit-button">Submit</button>
+            </div>
+            <h2 class="classes-header">Your Classes</h2>
+            <div class="class-card">
+                <h3 class="curr-class-header">Current Classes</h3>
+                <div class="curr-classes">Put current classes</div>
+                <button class="remove-btn-2">Remove</button>
+                <h3 class="add-class-header">Add Class</h3>
+                <input class="new-class" type="text" placeholder="Enter Class Code"></input>
+                <button class="enter-button-2">Enter</button>
+            </div>
+        </main>
+    </div>
+    <script src="ta.js"></script>
+</body>
+</html>
