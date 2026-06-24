@@ -313,3 +313,15 @@ button:hover {
   color: black;
   line-height: 1.2;
 }
+
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.class_header {
+    flex-grow: 1; 
+    text-align: center; 
+    margin-right: 280px; 
+}
