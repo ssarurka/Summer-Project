@@ -10,21 +10,33 @@
     <div class="wrapper">
         <nav>
             <ul>
-                <li><button class="nav-btn" id="homeBtn">Home</button></li>
-                <li><button class="nav-btn" id="faqBtn">FAQ Posts</button></li>
-                <li><button class="nav-btn" id="feedbackBtn">Feedback</button></li>
-                <li class="nav-settings"><button class="nav-btn" id="settingsBtn">Settings</button></li>
+                <li><button class="nav_btn" id="homeBtn">Home</button></li>
+                <li><button class="nav_btn" id="faqBtn">FAQ Posts</button></li>
+                <li><button class="nav_btn" id="feedbackBtn">Feedback</button></li>
+                <li class="nav_settings"><button class="nav_btn" id="settingsBtn">Settings</button></li>
             </ul>            
         </nav>
         <main>
             <header>
-                <div class="top-bar">
+                <div class="top_bar">
                     <button id="signOutBtn">Sign Out</button>
                 </div>
             </header>
             <header>
                 <h1>FAQ Posts</h1>
             </header>
+            <div class="scroll_zone">
+                <h2 class="section_title">New FAQ</h2>
+                <div class="new_faq_container">
+                    <textarea class="faq_input" id="faqInput" placeholder="Begin typing FAQ post here..."></textarea>
+                    <div class="post_btn_wrapper">
+                        <button class="post_btn" id="postBtn">POST</button>
+                    </div>
+                </div>
+                <h2 class="section_title">Recent FAQ</h2>
+                <div class="recent_faq_container"></div>
+            </div>
+        </main>
     </div>
     <script src="ta.js"></script>
 </body>
