@@ -1,0 +1,110 @@
+body {
+    background-color: white;
+    padding: 20px;
+
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;   
+}
+
+input {
+    width: 300px;
+    height: 40px;
+    border-radius: 25px;
+    padding: 0 20px;
+}
+
+.navBar {
+    padding: 10px;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+.boxes {
+    display: flex;
+    gap: 20px;
+    justify-content: right;
+}
+.leftPanel,
+.centerPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.updateCircle {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.checkButton {
+    border-radius: 25px;
+    height: 8vh;
+    width: 33vw;
+    background-color: #cfb991;
+
+}
+.circle {
+    background-color: #cfb991;
+    display: flex;
+    justify-content: center;
+    align-items: center;   /* vertical upper */
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+}
+.taReviewSquare,
+.taNameSquare,
+.timeTable {
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: flex-start;   /* vertical upper */
+    padding-top: 10px;
+    border-radius: 25px;
+}
+.timeTable {
+    background-color: white;
+    border: 2px solid black;
+    width: 33vw;
+    height: 80vh;
+}
+.taReviewSquare {
+    background-color: #cfb991;
+    width: 33vw;
+    height: 90vh; /* 90% of the screen */
+}
+.taNameSquare {
+    background-color: #cfb991;
+    width: 25vw;
+    height: 35vh; 
+}
+.side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #cfb991;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+}
+
+.side-nav a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+}
