@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Create Account </title>
+        <link rel="stylesheet" href="loginCreatePage.css">
+    </head>
+    <body>
+        <div class = "upperCre">
+            <p style="font-size: 40px ; font-weight: bold;"> Create an Account </p>
+        </div>
+        <div class = "centerCre">
+            <div class = "userCreInfo">
+                <div class="inputRow" id ="createAccountForm">
+                    <label for="emailLog"> Purdue email: </label>
+                    <input type="text" id="emailLog" name="email" placeholder="Enter your Purdue email" required>
+                </div>
+
+                <div class="inputRow">
+                    <label for="usernameCre"> Username: </label>
+                    <input type="text" id="usernameCre" name="username" placeholder="Enter a username" required>
+                </div>
+                <div class="inputRow">
+                    <label for="passwordCre"> Password: </label>
+                    <input type="text" id="passwordCre" name="password" placeholder="Enter a Password" required>
+                </div>
+               <div class="accountType">
+                   <p> Account Type: </p>
+                    <label>
+                        <input type="radio" name="accountType" value="admin" required>
+                        Admin
+                    </label>
+
+                    <label>
+                        <input type="radio" name="accountType" value="ta">
+                        TA
+                    </label>
+
+                    <label>
+                        <input type="radio" name="accountType" value="student">
+                        Student
+                    </label>
+                </div>
+                <div class = "bottom"> 
+                    <button type="submit" id="submitLog"> Submit </button>
+                    <a href= "loginPage.html" id="creBack"> Back</a>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
