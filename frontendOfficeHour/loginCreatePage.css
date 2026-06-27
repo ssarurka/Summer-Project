@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+.upper,
+.upperCre {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+.inputRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.inputRow label {
+    /*width: 350px;  */    /* Keeps labels aligned */
+    font-weight: bold;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.inputRow input {
+    /*flex: 1;          Input takes remaining space */
+    height: 20px;
+    width: 80vw;
+}
+.center,
+.centerCre {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 20px; 
+}
+
+
+
+button, #enterBtn,
+#creBack {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+    height: 30px;
+
+    background-color: #cfb991;
+    color: black;
+
+    border-radius: 20px;
+    border: 2px solid black;
+
+    font-size: 16px;
+    text-decoration: none;
+
+}
+
+.userInfo,
+.userCreInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    width: 500px;
+    padding: 30px;
+
+    /*border: 1px solid #ccc; */
+    border-radius: 10px;
+}
+
+.accountType {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.accountType label {
+    font-size: 16px;;
+}
+.accountType p {
+    width: 100px;      /* Same width as .inputRow label */
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+}
