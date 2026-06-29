@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminStyle.css">
+</head>
+<body>
+	<h1 class="title">Classes</h1>
+	<nav>
+		<ul>
+            <li><button class="button" onclick="location.href='adminHome.html'">Home</button></li>
+			<li><button class="button" onclick="location.href='adminAncmts.html'">Ancmts</button></li>
+			<li class="nav-settings"><button class="button" onclick="location.href='adminSettings.html'">Settings</button></li>
+        </ul>            
+        </nav>
+	<header>
+        <div class="top-bar">
+            <button class="button" id="signOutButton" onclick="location.href='adminSignOut.html'">Sign Out</button>
+        </div>
+    </header>
+	<main>
+		<div class="classes">
+			<button class="class-button" onclick="location.href='adminClass.html'">Class 1<br>DD/MM</button>
+			<button class="class-button" onclick="location.href='adminClass.html'">Class 2<br>DD/MM</button>
+			<button class="class-button" onclick="location.href='adminClass.html'">Class 3<br>DD/MM</button>
+		</div>
+		<div class="annHome">
+			<h3 id="annHead"><a href="adminAncmts.html">Announcements</a></h3><br>
+			<ul>
+				<li><b>Class 1:</b><br>Announcement 1<small id="date">DD/MM</small></li>
+				<li><b>Class 2:</b><br>Announcement 1<small id="date">DD/MM</small></li>
+				<li><b>Class 2:</b><br>Announcement 1<small id="date">DD/MM</small></li>
+			</ul>
+		</div>
+	</main>
+</body>
+</html>

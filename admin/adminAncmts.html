@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminStyle.css">
+	<title>Office Hours</title>
+</head>
+<body>
+	<h1 class="title">Classes</h1>
+	<nav>
+		<ul>
+            <li><button class="button" id="homeBtn" onclick="location.href='adminHome.html'">Home</button></li>
+			<li><button class="button" id="annButton" onclick="location.href='adminAncmts.html'">Ancmts</button></li>
+			<li class="nav-settings"><button class="button" onclick="location.href='adminSettings.html'">Settings</button></li>
+        </ul>            
+        </nav>
+	<header>
+        <div class="top-bar">
+            <button class="button" id="signOutButton" onclick="location.href='adminSignOut.html'">Sign Out</button>
+        </div>
+    </header>
+	<main>
+		<div class="annHome" id="annMain">
+			<h3><a href="adminAncmts.html" id="annHead">Announcements</a></h3><br>
+			<ul id="myList">
+				<li><b>Class 1:</b><br>Announcement 1<small id="date">DD/MM</small></li>
+				<li><b>Class 2:</b><br>Announcement 1<small id="date">DD/MM</small></li>
+				<li><b>Class 3:</b><br>Announcement 1<small id="date">DD/MM</small></li>
+			</ul>
+		</div>
+		<!-- Should show up everywhere including homepage but idk how to do that -->
+		<div class="addAncmt">
+			<p style="font-family: sans-serif;">Enter New Announcement</p>
+			<input id="inputBoxClass" type="text" placeholder="Enter class"/>
+			<input id="inputBoxBody" type="text" placeholder="Enter body"/>
+			<button class="button" id="addBtn">+</button>
+		</div>
+	</main>
+	
+	<script>
+		const inputBoxC = document.getElementById("inputBoxClass");
+		const inputBoxB = document.getElementById("inputBoxBody");
+		const addBtn = document.getElementById("addBtn");
+		const myList = document.getElementById("myList");
+		function addItem() {
+			try {
+				const valueC = inputBoxC.value.trim();
+				const valueB = inputBoxB.value.trim();
+
+				if (valueC.length === 0) {
+					return;
+				}
+				if (valueB.length === 0) {
+					return;
+				}
+
+				const li = document.createElement("li");
+				li.innerHTML = "<b>" + valueC + "</b><br>" + valueB;
+				myList.appendChild(li);
+
+				inputBoxC.value = "";
+				inputBoxB.value = "";
+			} catch (err) {
+				console.error("Error adding item:", err);
+			}
+		}
+
+		addBtn.addEventListener("click", addItem);
+
+		inputBoxC.addEventListener("keypress", (e) => {
+			if (e.key === "Enter") {
+				addItem();
+			}
+		});
+		inputBoxB.addEventListener("keypress", (e) => {
+			if (e.key === "Enter") {
+				addItem();
+			}
+		});
+	</script>
+</body>
+</html>
