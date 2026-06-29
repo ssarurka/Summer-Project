@@ -1,0 +1,226 @@
+
+    /* Color Theme */
+    :root {
+        --primary-tan: #cfb991;
+        --faq-bg: #d8c3a5;
+        --placeholder-grey: #a6a6a6;
+        --text-color: #000000;
+        --bg-color: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+
+    /* Main Layout - Split Sidebar and Content */
+    .app-container {
+        display: flex;
+        min-height: 100vh;
+        background-color: var(--bg-color);
+    }
+
+    
+    .sidebar {
+        width: 80px;
+        border-right: 2px solid var(--primary-tan);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        justify-content: space-between;
+    }
+
+    .nav-group { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+    .nav-icon { width: 30px; height: 30px; cursor: pointer; color: var(--primary-tan); font-size: 20px; }
+
+    /* Main Content Area */
+    .main-content {
+        flex: 1;
+        padding: 25px 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+    .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .search-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-bar {
+        width: 50%;
+        padding: 10px 20px;
+        border: 1.5px solid #000;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .header-right { display: flex; align-items: center; gap: 15px; }
+    .-btn {
+        background: var(--primary-tan);
+        border: none;
+        padding: 8px 25px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .profile-icon { font-size: 35px; color: var(--primary-tan); }
+
+    /* Recent Classes Row [1] */
+    .classes-row {
+        display: flex;
+        gap: 18px;
+        margin: 0 auto 35px;
+        width: 90%;
+    }
+
+    .class-card {
+        flex: 1;
+        min-width: 220px;
+        padding: 28px 15px;
+        border: 2px solid var(--primary-tan);
+        border-radius: 15px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        background: white;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .faq-section h2 {
+        width: 90%;
+        margin: 0 auto 15px auto;
+        font-weight: 500;
+    }
+
+    .faq-box {
+        background: var(--faq-bg);
+        border-radius: 25px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+}
+
+    .faq-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+    .faq-avatar {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 22px;
+        margin-right: 20px;
+        flex-shrink: 0;
+}
+
+/* Color Variants for FAQ Avatars */
+.green {
+    background: #9ee5d0;
+    color: #16584b;
+}
+
+.gray {
+    background: #ece8de;
+    color: #666;
+}
+
+.purple {
+    background: #cfc8ff;
+    color: #443c92;
+}
+
+.orange {
+    background: #ffc86b;
+    color: #6e4510;
+}
+
+.faq-content {
+    flex: 1;
+}
+
+.faq-user {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.faq-question {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.faq-time {
+    color: #777;
+    font-size: 12px;
+}
+
+.faq-arrow {
+    font-size: 24px;
+    color: #777;
+    padding-left: 15px;
+}
+
+.see-more-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 18px;
+    border: 1px solid rgba(0,0,0,0.2);
+    background: transparent;
+    border-radius: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.see-more-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+    /* Mockup placeholder lines for FAQ content */
+    
+
+    footer {
+        margin-top: auto;
+        text-align: center;
+        font-size: 10px;
+        padding-top: 20px;
+    }
+.profile-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+
+    background: #9ee5d0;
+    color: #16584b;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
