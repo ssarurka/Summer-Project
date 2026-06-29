@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     homeButton = document.getElementById("homeBtn");
     homeButton.addEventListener("click", function () {
         window.location.href = "taHome.html";
@@ -60,6 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 rowItem.remove();
             }
         });
+    });
+
+    menuBtn = document.getElementById('menuBtn');
+    navBar = document.getElementById('navBar');
+    menuBtn.addEventListener('click', () => {
+        navBar.classList.toggle('active');
     });
 });
 
