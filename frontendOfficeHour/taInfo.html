@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Office Hours TA info </title>
+        <link rel="stylesheet" href="taInfo.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="sideNav" class="side-nav">
+            <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+            <a href="#">Home</a>
+            <a href="#">Classes</a>
+            <a href="#">Notifications</a>
+            <a href="#">FAQ</a>
+        </div>
+
+        <div class="navBar">
+            <span id="menuBtn"
+                class="menu-icon"
+                style="font-size:30px;cursor:pointer"
+                onclick="openNav()">&#9776;</span>
+        </div>
+
+        <div class = "top"> 
+            <input type="text" placeholder="Search Class...">  
+        </div>
+        <div class = "boxes"> 
+            <div class = "leftPanel"> 
+                <button class = "checkButton" type="button"> CHECKIN/OUT</button>
+                <div class = "timeTable"> CS240 TIME TABLE </div>
+            </div>
+            <div class = "centerPanel">
+                <div class = "taNameSquare" > TA NAMES </div>
+                <div class = "updateCircle"> 
+                    <div class = "circle"> Line #</div>
+                    <div class = "circle"> Wait Time</div>
+                </div>
+
+            </div>
+            <div class = "taReviewSquare" > TA Reviews </div>
+        </div>
+    </body>
+</html>
