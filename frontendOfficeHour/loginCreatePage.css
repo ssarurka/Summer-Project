@@ -5,7 +5,8 @@ body {
     align-items: center;
 }
 .upper,
-.upperCre {
+.upperCre,
+.upperReset {
     display: flex;
     justify-content: center;
     padding-top: 100px;
@@ -30,7 +31,8 @@ body {
     width: 80vw;
 }
 .center,
-.centerCre {
+.centerCre,
+.centerReset {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +50,7 @@ body {
 
 
 button, #enterBtn,
-#creBack {
+#creBack, #forgotPassBtn {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -68,7 +70,8 @@ button, #enterBtn,
 }
 
 .userInfo,
-.userCreInfo {
+.userCreInfo,
+.userResetPassInfo{
     display: flex;
     flex-direction: column;
     gap: 15px;
