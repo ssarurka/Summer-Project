@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXISTS office_hour_system_application;
