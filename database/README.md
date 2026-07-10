@@ -8,8 +8,8 @@ MySQL Community Server installed
 
 ## Files: 
 
-create_database.sql -> Creates the office_hour_system_application database.
-create_tables.sql -> Creates all tables and relationships within the database.
+- create_database.sql -> Creates the office_hour_system_application database.
+- create_tables.sql -> Creates all tables and relationships within the database.
 
 ## Database name:
 ```
