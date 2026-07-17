@@ -9,7 +9,7 @@
         <div id="sideNav" class="side-nav">
             <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
             <a href="#">Home</a>
-            <a href="#">Classes</a>
+            <a href="../classes.html">Classes</a>
             <a href="#">Notifications</a>
             <a href="#">FAQ</a>
         </div>
@@ -27,13 +27,40 @@
         <div class = "boxes"> 
             <div class = "leftPanel"> 
                 <button class = "checkButton" type="button"> CHECKIN/OUT</button>
-                <div class = "timeTable"> CS240 TIME TABLE </div>
+                <div class = "timeTable"> 
+                   <h3>CS240 TIME TABLE</h3>
+                   <div class="tableContainer">
+                        <table id="timeTable" class="time-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="timeTableBody">
+                                <!-- Rows will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class = "centerPanel">
                 <div class = "taNameSquare" > TA NAMES </div>
                 <div class = "updateCircle"> 
-                    <div class = "circle"> Line #</div>
-                    <div class = "circle"> Wait Time</div>
+                    <div class = "outerCircle">
+                        <div class="innerCircle">
+                            <span class="label">Line #</span>
+                            <span class="number">12</span>
+                        </div>
+                    </div>
+                    <div class="outerCircle">
+                        <div class="innerCircle">
+                            <span class="label">Wait Time</span>
+                            <span class="number">15</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>
