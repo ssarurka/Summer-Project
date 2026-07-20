@@ -108,6 +108,32 @@ def handle_reset_password():
             "message": "Password was unable to be reset"
         })
 
+@app.route("/queueData", methods=["GET"])
+def get_queue_data():
+    metrics = database.get_wait_data()
+    queue_list = database.get_active_queue()
+    return jsonify({
+        "success": True,
+        "studentsInLine": metrics["students_in_line"],
+        "projectedWaitTime": metrics["projected_wait_time"],
+        "queue": queue_list
+    })
+
+@app.route("/removeFromQueue", methods=["DELETE"])
+def remove_from_queue():
+    data = request.json
+    queue_number = data.get("queueNumber")
+    rows_deleted = database.remove_from_queue(queue_number)
+    if rows_deleted > 0:
+        return jsonify({
+            "success": True,
+            "message": f"Successfully removed position #{queue_number} from the line."
+        })
+    else:
+        return jsonify({
+            "success": False,
+            "message": "Queue position not found or already removed."
+        })
 
 if __name__ == "__main__":
     app.run(debug=True)

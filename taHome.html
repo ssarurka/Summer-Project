@@ -25,17 +25,17 @@
             </header>
             <div class="container">
                 <div class="circle_graph_container">
-                    <div class="outer_circle" style="--percentage: 65%;">
+                    <div class="outer_circle" id="waitTimeCircle" style="--percentage: 0%;">
                         <div class="inner_circle">
-                            <span class="number">1:20</span>
+                            <span class="number" id="waitTimeValue">0:00</span>
                             <span class="label">projected<br>wait time</span>
                         </div>
                     </div>
                 </div> 
                 <div class="circle_graph_container">
-                    <div class="outer_circle" style="--percentage: 65%;">
+                    <div class="outer_circle" id="studentCountCircle" style="--percentage: 0%;">
                         <div class="inner_circle">
-                            <span class="number">7</span>
+                            <span class="number" id="studentCountValue">0</span>
                             <span class="label">students<br>in line</span>
                         </div>
                     </div>
@@ -46,119 +46,55 @@
             </div>
             <h2>Current Line</h2>
             <div class="scroll_zone">
-                <div class="line_container">
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#1</span>
-                            <span class="line_name">Abby</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#2</span>
-                            <span class="line_name">Shreeya</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#3</span>
-                            <span class="line_name">Parul</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#4</span>
-                            <span class="line_name">Samaika</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#5</span>
-                            <span class="line_name">Shannon</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#6</span>
-                            <span class="line_name">Prisha</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#7</span>
-                            <span class="line_name">Yay</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#8</span>
-                            <span class="line_name">Hello</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                    <div class="line_spot">
-                        <div class="line_header">
-                            <span class="line_number">#9</span>
-                            <span class="line_name">Goodbye</span>
-                        </div>
-                        <p class="line_body">
-                            I keep getting a segmentation fault on read_data() and am unable to figure out why...
-                        </p>
-                        <div class="line_footer">
-                            <button class="remove_btn">REMOVE</button>
-                        </div>
-                    </div>
-                </div>
+                <div class="line_container" id="queueCardsContainer"></div>
             </div>
         </main>    
     </div>
-    <script src="ta.js"></script>
+    <script>
+        const BACKEND_URL = "http://127.0.0.1:5000";
+        async function loadDashboardData() {
+            const response = await fetch(`${BACKEND_URL}/queueData`);
+            const data = await response.json();
+            if (data.success) {
+                document.getElementById("waitTimeValue").innerText = data.projectedWaitTime;
+                document.getElementById("studentCountValue").innerText = data.studentsInLine;
+                const countPercent = Math.min((data.studentsInLine / 12) * 100, 100);
+                document.getElementById("studentCountCircle").style.setProperty('--percentage', `${countPercent}%`);
+                document.getElementById("waitTimeCircle").style.setProperty('--percentage', `${countPercent}%`);
+                const container = document.getElementById("queueCardsContainer");
+                container.innerHTML = "";
+                data.queue.forEach(item => {
+                    const cardHTML = `
+                        <div class="line_spot">
+                            <div class="line_header">
+                                <span class="line_number">#${item.queue_number}</span>
+                                <span class="line_name">${item.username}</span>
+                            </div>
+                            <p class="line_body">${item.help_request}</p>
+                            <div class="line_footer">
+                                <button class="remove_btn" onclick="removeStudent(${item.queue_number})">REMOVE</button>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += cardHTML;
+                });
+            }
+        }
+        async function removeStudent(queueNumber) {
+            const response = await fetch(`${BACKEND_URL}/removeFromQueue`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ queueNumber: queueNumber })
+            });
+            const data = await response.json();
+            
+            if (data.success) {
+                loadDashboardData();
+            } else {
+                alert(data.message);
+            }
+        }
+        window.onload = loadDashboardData;
+    </script>
 </body>
 </html>
