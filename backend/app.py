@@ -1,10 +1,21 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import database
+import bcrypt
 
 app = Flask(__name__)
 CORS(app)
 print("CORS ENABLED")
+
+def hash_password(password):
+    pwd_bytes = password.encode("utf-8")
+    salt = bcrypt.gensalt()
+    hash_pwd = bcrypt.hashpw(pwd_bytes, salt)
+    return hash_pwd.decode("utf-8")
+
+def verify_password(stored_hash, input_password):
+    return bcrypt.checkpw(input_password.encode("utf-8"), stored_hash.encode("utf-8"))
+
 
 @app.route("/createAccount", methods=["POST"])
 def create_account():
@@ -27,12 +38,12 @@ def create_account():
             "success": False,
             "message": "Email already exists."
         })
-    
+    hash_pwd = hash_password(password)
     # create account
     database.create_user(
         email,
         username,
-        password,
+        hash_pwd,
         account_type
     )
 
@@ -57,7 +68,7 @@ def handle_login():
                 "message": "Username does not exist"
             })
     
-    if user["password_hash"] != password:
+    if not verify_password(user["password_hash"], password):
         return jsonify({
             "success": False,
             "message": "Incorrect Password"
@@ -95,9 +106,9 @@ def handle_reset_password():
             "success": False,
             "message": "Incorrect Email"
         })
-    
+    hashed_pwd = hash_password(password)
     # ask database.py if there is an account with given username & to reset password
-    if (database.reset_password(username, password)):
+    if (database.reset_password(username, hashed_pwd)):
         return jsonify({
             "success": True,
             "message": "Password is Reset"

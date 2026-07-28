@@ -2,9 +2,9 @@ import mysql.connector
 # Replace your MySql password when testing & remove when done
 # place holder Password: YOUR_MYSQL_PASSWORD_HERE
 connection = mysql.connector.connect(
-    host="localhost",
+    host="127.0.0.1",
     user="root",
-    password="YOUR_MYSQL_PASSWORD_HERE", 
+    password="FMSJaguar0208!", 
     database="office_hour_system_application"
 )
 
