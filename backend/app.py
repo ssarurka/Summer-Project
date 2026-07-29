@@ -108,6 +108,79 @@ def handle_reset_password():
             "message": "Password was unable to be reset"
         })
 
+@app.route("/queueData", methods=["GET"])
+def get_queue_data():
+    metrics = database.get_wait_data()
+    queue_list = database.get_active_queue()
+    return jsonify({
+        "success": True,
+        "studentsInLine": metrics["students_in_line"],
+        "projectedWaitTime": metrics["projected_wait_time"],
+        "queue": queue_list
+    })
+
+@app.route("/removeFromQueue", methods=["DELETE"])
+def remove_from_queue():
+    data = request.json
+    queue_number = data.get("queueNumber")
+    rows_deleted = database.remove_from_queue(queue_number)
+    if rows_deleted > 0:
+        return jsonify({
+            "success": True,
+            "message": f"Successfully removed position #{queue_number} from the line."
+        })
+    else:
+        return jsonify({
+            "success": False,
+            "message": "Queue position not found or already removed."
+        })
+
+@app.route("/getFaqs", methods=["GET"])
+def get_faqs():
+    class_id = request.args.get("class_id", 1)
+    faqs = database.get_faqs(class_id)
+    return jsonify({
+        "success": True,
+        "faqs": faqs
+    })
+
+@app.route("/addFaq", methods=["POST"])
+def add_faq():
+    data = request.json
+    post_text = data.get("post")
+    class_id = data.get("class_id", 1)
+    if not post_text:
+        return jsonify({
+            "success": False,
+            "message": "FAQ post content cannot be empty."
+        }), 400
+    rows_inserted = database.add_faq(class_id, post_text)
+    if rows_inserted > 0:
+        return jsonify({
+            "success": True,
+            "message": "FAQ posted successfully."
+        })
+    else:
+        return jsonify({
+            "success": False,
+            "message": "Failed to post FAQ."
+        })
+
+@app.route("/removeFaq", methods=["DELETE"])
+def remove_faq():
+    data = request.json
+    faq_id = data.get("faq_id")
+    rows_deleted = database.remove_faq(faq_id)
+    if rows_deleted > 0:
+        return jsonify({
+            "success": True,
+            "message": "FAQ removed successfully."
+        })
+    else:
+        return jsonify({
+            "success": False,
+            "message": "FAQ position not found or already deleted."
+        })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, threaded=False)
