@@ -123,3 +123,43 @@ def remove_from_queue(queue_number):
     rows_deleted = cursor.rowcount
     cursor.close()
     return rows_deleted
+
+def get_faqs(class_id=1):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT faq_id, class_id, post, creation_time 
+        FROM faqs 
+        WHERE class_id = %s 
+        ORDER BY creation_time DESC
+        """,
+        (class_id,)
+    )
+    faq_list = cursor.fetchall()
+    cursor.close()
+    return faq_list
+
+def add_faq(class_id, post_text):
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        INSERT INTO faqs (class_id, post) 
+        VALUES (%s, %s)
+        """,
+        (class_id, post_text)
+    )
+    connection.commit()
+    rows_inserted = cursor.rowcount
+    cursor.close()
+    return rows_inserted
+
+def remove_faq(faq_id):
+    cursor = connection.cursor()
+    cursor.execute(
+        "DELETE FROM faqs WHERE faq_id = %s",
+        (faq_id,)
+    )
+    connection.commit()
+    rows_deleted = cursor.rowcount
+    cursor.close()
+    return rows_deleted

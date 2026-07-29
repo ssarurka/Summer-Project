@@ -50,51 +50,6 @@
             </div>
         </main>    
     </div>
-    <script>
-        const BACKEND_URL = "http://127.0.0.1:5000";
-        async function loadDashboardData() {
-            const response = await fetch(`${BACKEND_URL}/queueData`);
-            const data = await response.json();
-            if (data.success) {
-                document.getElementById("waitTimeValue").innerText = data.projectedWaitTime;
-                document.getElementById("studentCountValue").innerText = data.studentsInLine;
-                const countPercent = Math.min((data.studentsInLine / 12) * 100, 100);
-                document.getElementById("studentCountCircle").style.setProperty('--percentage', `${countPercent}%`);
-                document.getElementById("waitTimeCircle").style.setProperty('--percentage', `${countPercent}%`);
-                const container = document.getElementById("queueCardsContainer");
-                container.innerHTML = "";
-                data.queue.forEach(item => {
-                    const cardHTML = `
-                        <div class="line_spot">
-                            <div class="line_header">
-                                <span class="line_number">#${item.queue_number}</span>
-                                <span class="line_name">${item.username}</span>
-                            </div>
-                            <p class="line_body">${item.help_request}</p>
-                            <div class="line_footer">
-                                <button class="remove_btn" onclick="removeStudent(${item.queue_number})">REMOVE</button>
-                            </div>
-                        </div>
-                    `;
-                    container.innerHTML += cardHTML;
-                });
-            }
-        }
-        async function removeStudent(queueNumber) {
-            const response = await fetch(`${BACKEND_URL}/removeFromQueue`, {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ queueNumber: queueNumber })
-            });
-            const data = await response.json();
-            
-            if (data.success) {
-                loadDashboardData();
-            } else {
-                alert(data.message);
-            }
-        }
-        window.onload = loadDashboardData;
-    </script>
+    <script src="ta.js"></script>
 </body>
 </html>
