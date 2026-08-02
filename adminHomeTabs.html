@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminStyle.css">
+</head>
+<body>
+	<div class="wrapper">
+	<h1 class="title">Classes</h1>
+	<button class="menu_btn" id="menuBtn">☰</button>
+	<nav id="navBar">
+        <ul>
+			<li><button class="nav_btn" id="homeBtn">Home</button></li>
+			<li><button class="nav_btn" id="faqBtn">FAQ Posts</button></li>
+			<li class="nav_settings"><button class="nav_btn" id="settingsBtn">Settings</button></li>
+		</ul>            
+    </nav>
+	
+	<main>
+		<header>
+        	<div class="top_bar">
+            	<button id="signOutBtn">Sign Out</button>
+        	</div>
+    	</header>
+
+		<div class="tabs-container" id="tabsDiv">
+            <!-- CONTAINER -->
+            <input type="radio" name="tabs" id="tab1" checked>
+			<label for="tab1">CS240</label>
+			<div class="tab-content">
+				<h3>CS240</h3>
+				<p>Choose a TA to view feedback:</p>
+				<button class="selectBtn" id="selectBtn">select</button>
+				<select name="tas" id="taDrop">
+					<!-- DROPDOWN -->
+				</select>
+				<div id="feedback">
+					<!-- CONTENT -->
+				</div><hr style="margin-top: 15px;">
+				<div id="office-hours">
+					<!-- CONTENT -->
+				</div>
+			</div>
+        </div>
+	</main>
+	</div>
+	<script src="admin.js"></script>
+</body>
+</html>

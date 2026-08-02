@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminStyle.css">
+	<title>Office Hours</title>
+</head>
+<body>
+	
+	<nav>
+		<ul>
+            <li><button class="button" id="homeBtn" onclick="location.href='adminHome.html'">Home</button></li>
+			<li><button class="button" id="annButton" onclick="location.href='adminAncmts.html'">Ancmts</button></li>
+			<li class="nav-settings"><button class="button" onclick="location.href='adminSettings.html'">Settings</button></li>
+        </ul>            
+    </nav>
+	<h1 class="title">Classes</h1>
+	<header>
+        <div class="top-bar">
+            <button class="button" id="signOutButton"  onclick="location.href='adminSignOut.html'">Sign Out</button>
+        </div>
+    </header>
+	<main>
+		<div>
+			<ul id="my-list">
+			</ul>
+		</div>
+	</main>
+	<script>
+        const list = ['Class 1', 'Class 2', 'Class 3'];
+		const cont = document.getElementById('my-list');
+		cont.innerHTML = list
+			.map(item => `<li>${item}</li>`)
+			.join('');
+    </script>
+</body>
+</html>
