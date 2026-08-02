@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminStyle.css">
+	<title>Office Hours</title>
+</head>
+<body>
+	<h1 class="title">Classes</h1>
+	<div class="wrapper">
+        <button class="menu_btn" id="menuBtn">☰</button>
+        <nav id="navBar">
+            <ul>
+                <li><button class="nav_btn" id="homeBtn">Home</button></li>
+                <li><button class="nav_btn" id="faqBtn">FAQ Posts</button></li>
+                <li class="nav_settings"><button class="nav_btn" id="settingsBtn">Settings</button></li>
+            </ul>            
+        </nav>
+        <main>
+            <header>
+                <div class="top_bar">
+                    <button id="signOutBtn">Sign Out</button>
+                </div>
+            </header>
+            <header>
+                <h1>FAQ Posts</h1>
+            </header>
+            <div class="scroll_zone">
+                <h2 class="section_title">New FAQ</h2>
+                <div class="new_faq_container">
+                    <textarea class="faq_input" id="faqInput" placeholder="Begin typing FAQ post here..."></textarea>
+                    <div class="post_btn_wrapper">
+                        <button class="post_btn" id="postBtn">POST</button>
+                    </div>
+                </div>
+                <h2 class="section_title">Recent FAQ</h2>
+                <div class="recent_faq_container"></div>
+            </div>
+        </main>
+    </div>
+	<script src="admin.js"></script>
+</body>
+</html>
