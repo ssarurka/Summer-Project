@@ -163,3 +163,138 @@ def remove_faq(faq_id):
     rows_deleted = cursor.rowcount
     cursor.close()
     return rows_deleted
+
+def get_classes(admin_id):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT class_id, class_name, class_semester 
+        FROM classes 
+        WHERE class_admin = %s
+        """,
+        (admin_id, )
+    )
+    class_list = cursor.fetchall()
+    cursor.close()
+    return class_list
+
+def get_class(class_name):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT class_id
+        FROM classes 
+        WHERE class_name = %s
+        """,
+        (class_name, )
+    )
+    class_list = cursor.fetchall()
+    cursor.close()
+    return class_list
+
+def get_tas(class_id):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT ta_classes.ta_id, users.username
+        FROM ta_classes
+        INNER JOIN users ON ta_classes.ta_id = users.user_id
+        WHERE ta_classes.class_id = %s
+        """,
+        (class_id, )
+    )
+    ta_list = cursor.fetchall()
+    cursor.close()
+    return ta_list
+
+def get_feedback(ta_id, class_id):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT users_ta_reviews.student_review, users_ta_reviews.creation_time, users_ta_reviews.ta_id, users.username, users.email
+        FROM users_ta_reviews INNER JOIN users
+        ON users_ta_reviews.ta_id = users.user_id
+        WHERE users_ta_reviews.class_id = %s AND users_ta_reviews.ta_id = %s
+        ORDER BY users_ta_reviews.creation_time DESC
+        """,
+        (class_id, ta_id, )
+    )
+    ta_list = cursor.fetchall()
+    cursor.close()
+    return ta_list
+
+def get_feedback_name(ta_name, class_id):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT users_ta_reviews.student_review, users_ta_reviews.creation_time, users_ta_reviews.ta_id, users.username, users.email
+        FROM users_ta_reviews INNER JOIN users
+        ON users_ta_reviews.ta_id = users.user_id
+        WHERE users_ta_reviews.class_id = %s AND users.username = %s
+        """,
+        (class_id, ta_name, )
+    )
+    ta_list = cursor.fetchall()
+    cursor.close()
+    return ta_list
+
+def get_office_hours(class_id):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT office_hours.day_of_week, office_hours.start_time, office_hours.end_time, users.username, locations.location_name
+        FROM  office_hours
+        INNER JOIN ta_office_hours ON ta_office_hours.office_hour_id = office_hours.office_hour_id
+        INNER JOIN locations ON locations.location_id = office_hours.location_id
+        INNER JOIN users ON ta_office_hours.ta_id = users.user_id
+        WHERE office_hours.class_id = %s
+        """,
+        (class_id, )
+    )
+    oh_list = cursor.fetchall()
+    cursor.close()
+    return oh_list
+
+def get_location_id(location_name):
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        SELECT location_id
+        FROM locations
+        WHERE location_name = %s
+        """,
+        (location_name,)
+    )
+    loc = cursor.fetchall()
+    cursor.close()
+    return loc
+
+def create_location(location_name):
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        INSERT INTO locations
+        VALUES (DEFAULT, %s)
+        """,
+        (location_name,)
+    )
+    connection.commit()
+    cursor.close()
+
+def create_office_hour(class_id, day_of_week, start_time, end_time, location_name):
+    loc =  get_location_id(location_name)
+    if (len(loc) < 1):
+        create_location(location_name)
+        loc = get_location_id(location_name)[0][0]
+    else:
+        loc = loc[0][0]
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        INSERT INTO office_hours
+        VALUES (DEFAULT, %s, %s, %s, %s, %s, DEFAULT, DEFAULT)
+        """,
+        (class_id, day_of_week, start_time, end_time, loc,)
+    )
+    connection.commit()
+    cursor.close()
