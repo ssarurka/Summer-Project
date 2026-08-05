@@ -14,7 +14,7 @@ print("CORS ENABLED")
 connection = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="green1074", 
+    password="YOUR_MYSQL_PASSWORD_HERE", 
     database="office_hour_system_application"
 )
 
