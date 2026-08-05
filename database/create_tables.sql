@@ -88,10 +88,48 @@ CREATE TABLE users_ta_reviews (
 
 CREATE TABLE student_help_queue (
     queue_id INT AUTO_INCREMENT PRIMARY KEY,
-    queue_number INT NOT NULL UNIQUE,
     check_in_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    class_id INT NOT NULL,
     student_id INT NOT NULL,
     help_request TEXT NOT NULL,
 
-    FOREIGN KEY(student_id) REFERENCES users(user_id)
+    UNIQUE (student_id, class_id),
+
+    FOREIGN KEY(student_id) REFERENCES users(user_id),
+    FOREIGN KEY(class_id) REFERENCES classes(class_id)
 );
+
+CREATE TABLE past_student_help_queue (
+    past_queue_id INT AUTO_INCREMENT PRIMARY KEY,
+    class_id INT NOT NULL,
+    check_in_time TIMESTAMP,
+    check_out_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    student_id INT NOT NULL,
+    help_request TEXT NOT NULL,
+
+    FOREIGN KEY(student_id) REFERENCES users(user_id),
+    FOREIGN KEY(class_id) REFERENCES classes(class_id)
+);
+
+-- SQL AFTER DELETE TRIGGER to move deleted rows from student_help_queue to past_student_help_queue
+DELIMITER $$
+
+CREATE TRIGGER move_to_past_queue
+BEFORE DELETE ON student_help_queue
+FOR EACH ROW
+BEGIN
+    INSERT INTO past_student_help_queue (
+        class_id,
+        check_in_time,
+        student_id,
+        help_request
+    )
+    VALUES (
+        OLD.class_id,
+        OLD.check_in_time,
+        OLD.student_id,
+        OLD.help_request
+    );
+END$$
+
+DELIMITER ;
