@@ -295,8 +295,101 @@ hr {
     font-size: small;
 }
 
-th, td {
+th {
     border: 2px solid #cfb991;
     padding: 10px;
     text-align: left;
+}
+
+td {
+    border: 2px solid #e0e0e0;
+    padding: 10px;
+    text-align: left;
+}
+
+.upperReset {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.inputRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.inputRow label {
+    /*width: 350px;  */    /* Keeps labels aligned */
+    font-weight: bold;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.inputRow input {
+    /*flex: 1;          Input takes remaining space */
+    height: 20px;
+    width: 80vw;
+}
+
+.centerReset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 20px; 
+}
+
+.userResetPassInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#creBack {
+    background: #cfb991;
+    color: white;
+    text-align: center;
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 6px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+#submitReset {
+    padding: 10px 18px;
+}
+
+.create-office-hour {
+    width: 90%;
+    margin: auto;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+    border: 3px solid #cfb991;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+#createOhBtn {
+    margin-top: 5px;
+}
+
+#dow {
+    font-family: 'Times New Roman', Times, serif;
 }

@@ -52,7 +52,6 @@ def create_account():
         "message": "Account created."
     })
 
-
 @app.route("/login", methods=["POST"])
 def handle_login():
     data = request.json
@@ -81,7 +80,6 @@ def handle_login():
         "userId": user["user_id"]
     })
         
-
 @app.route("/resetPassword", methods=["PATCH"])
 def handle_reset_password():
     print("=== Reset password route reached ===")
@@ -192,6 +190,67 @@ def remove_faq():
             "success": False,
             "message": "FAQ position not found or already deleted."
         })
+
+@app.route("/createOH", methods=["POST"])
+def create_office_hour_app():
+    data = request.json
+    class_name = data["class_id"]
+    dow = data["dow"]
+    start_time = data["start_time"]
+    end_time = data["end_time"]
+    loc = data["loc"]
+
+
+    # create oh
+    database.create_office_hour(
+        class_name,
+        dow,
+        start_time,
+        end_time,
+        loc
+    )
+
+    return jsonify({
+        "success": True,
+        "message": "Office Hour created."
+    })
+
+@app.route("/getClass", methods=["GET"])
+def get_class_app():
+    class_filter = request.args.get('name', '')
+    class_list = database.get_class(class_filter)
+    return jsonify({"success" : True,
+                    "classes" : class_list })
+
+@app.route("/getClasses", methods=["GET"])
+def get_classes_app():
+    class_list = database.get_classes(database.DEFAULT_ID)
+    return jsonify({"success" : True,
+                    "classes" : class_list })
+
+@app.route("/getFeedback", methods=["GET"])
+def get_feedback_app():
+    class_filter = request.args.get('class', '')
+    ta_list = database.get_tas(class_filter)
+    feedbacks = []
+    for ta in ta_list:
+        feedbacks += database.get_feedback(ta.get('ta_id'), class_filter)
+    return jsonify({"success" : True,
+                    "fbs" : feedbacks })
+
+@app.route("/getTas", methods=["GET"])
+def get_tas_app():
+    class_filter = request.args.get('class', '')
+    ta_list = database.get_tas(class_filter)
+    return jsonify({"success" : True,
+                    "tas" : ta_list })
+
+@app.route("/getOfficeHours", methods=["GET"])
+def get_office_hours_app():
+    class_filter = request.args.get('class', '')
+    oh_list = database.get_office_hours(class_filter)
+    return jsonify({"success" : True,
+                    "office_hours" : oh_list })
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=False)

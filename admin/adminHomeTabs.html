@@ -43,6 +43,35 @@
 				</div>
 			</div>
         </div>
+
+		<div class="create-office-hour">
+			<h3>Create new office hour:</h3>
+			<form>
+				<label for="cname">Class Name:</label>
+				<input type="text" id="cname" name="cname"><br>
+
+				<label for="dow">Day of the week:</label>
+				<select name="dow" id="dow">
+					<option value="m">Monday</option>
+					<option value="t">Tuesday</option>
+					<option value="w">Wednesday</option>
+					<option value="r">Thursday</option>
+					<option value="f">Friday</option>
+					<option value="s">Saturday</option>
+					<option value="n">Sunday</option>
+				</select><br>
+
+				<label for="stime">Start time:</label>
+				<input type="text" id="stime" name="stime"><br>
+
+				<label for="etime">End time:</label>
+				<input type="text" id="etime" name="etime"><br>
+
+				<label for="loc">Location:</label>
+				<input type="text" id="loc" name="loc"><br>
+			</form>
+			<button id="createOhBtn">create</button>
+		</div>
 	</main>
 	</div>
 	<script src="admin.js"></script>

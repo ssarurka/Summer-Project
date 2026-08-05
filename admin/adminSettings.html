@@ -25,17 +25,23 @@
         	</div>
     	</header>
 		<div class="settings">
-			<h1>Settings</h1><br>
+			<br><h1>Settings</h1><br>
 			<div class="fields">
 				<h2>Name</h2>
 				<p>Admin/ Professor's Name</p><br>
-				<h2>Password</h2><br>
+				<h2>Password</h2><button id="changePasswordBtn">change password</button><br>
 				<h2>Email</h2><br>
 			</div>
 		</div>
 	</main>
 	</div>
 	<script src="admin.js"></script>
+	<script>
+		changePasswordBtn = document.getElementById("changePasswordBtn");
+		changePasswordBtn.addEventListener("click", function () {
+			window.location.href = "resetPassword.html";
+		});
+	</script>
     </main>
 </body>
 </html>

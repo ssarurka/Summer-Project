@@ -1,3 +1,6 @@
+# REQUIRED STUFF HAS BEEN MOVED TO app.py & database.py
+# USED ONLY FOR TESTING FOR ADMIN
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import mysql.connector
@@ -15,6 +18,7 @@ connection = mysql.connector.connect(
     database="office_hour_system_application"
 )
 
+# place holders for the user that's logged in
 DEFAULT_ID = 3
 DEFAULT_CLASS = 1
 TA_ID = 4
@@ -28,6 +32,20 @@ def get_classes(admin_id):
         WHERE class_admin = %s
         """,
         (admin_id, )
+    )
+    class_list = cursor.fetchall()
+    cursor.close()
+    return class_list
+
+def get_class(class_name):
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT class_id
+        FROM classes 
+        WHERE class_name = %s
+        """,
+        (class_name, )
     )
     class_list = cursor.fetchall()
     cursor.close()
@@ -95,6 +113,81 @@ def get_office_hours(class_id):
     oh_list = cursor.fetchall()
     cursor.close()
     return oh_list
+
+def get_location_id(location_name):
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        SELECT location_id
+        FROM locations
+        WHERE location_name = %s
+        """,
+        (location_name,)
+    )
+    loc = cursor.fetchall()
+    cursor.close()
+    return loc
+
+def create_location(location_name):
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        INSERT INTO locations
+        VALUES (DEFAULT, %s)
+        """,
+        (location_name,)
+    )
+    connection.commit()
+    cursor.close()
+
+def create_office_hour(class_id, day_of_week, start_time, end_time, location_name):
+    loc =  get_location_id(location_name)
+    if (len(loc) < 1):
+        create_location(location_name)
+        loc = get_location_id(location_name)[0][0]
+    else:
+        loc = loc[0][0]
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        INSERT INTO office_hours
+        VALUES (DEFAULT, %s, %s, %s, %s, %s, DEFAULT, DEFAULT)
+        """,
+        (class_id, day_of_week, start_time, end_time, loc,)
+    )
+    connection.commit()
+    cursor.close()
+
+@app.route("/createOH", methods=["POST"])
+def create_office_hour_app():
+    data = request.json
+    class_name = data["class_id"]
+    dow = data["dow"]
+    start_time = data["start_time"]
+    end_time = data["end_time"]
+    loc = data["loc"]
+
+
+    # create oh
+    create_office_hour(
+        class_name,
+        dow,
+        start_time,
+        end_time,
+        loc
+    )
+
+    return jsonify({
+        "success": True,
+        "message": "Office Hour created."
+    })
+
+@app.route("/getClass", methods=["GET"])
+def get_class_app():
+    class_filter = request.args.get('name', '')
+    class_list = get_class(class_filter)
+    return jsonify({"success" : True,
+                    "classes" : class_list })
 
 @app.route("/getClasses", methods=["GET"])
 def get_classes_app():

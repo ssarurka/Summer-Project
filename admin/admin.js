@@ -1,6 +1,8 @@
 BACKEND_URL = "http://127.0.0.1:5000";
 DEFAULT_CLASS = 1;
 
+curr_class = DEFAULT_CLASS;
+
 function addDict(dict, ta, review) {
     if (Object.hasOwn(ta)) {
         dict[ta].push(review);
@@ -10,6 +12,55 @@ function addDict(dict, ta, review) {
         dict[ta] = list;
     }
     return dict;
+}
+
+function getSelectedTab() {
+    tab = document.getElementsByName('tabs');
+    for (i = 0; i < tab.length; i++) {
+        if (tab[i].checked) {
+            console.log("tab value = " +  tab[i].labels[0].textContent);
+            return tab[i].labels[0].textContent;
+        }
+    }
+    return "None";
+}
+
+function getFormData() {
+    let class_name = document.getElementById("cname").value;
+    return {
+        class_id:
+        curr_class,
+        dow:
+        document.getElementById("dow").value,
+        start_time:
+        document.getElementById("stime").value,
+        end_time:
+        document.getElementById("etime").value,
+        loc:
+        document.getElementById("loc").value
+    };
+}
+
+async function createOfficeHour() {
+    let data = getFormData()
+    console.log(data)
+    await sendCreateOHRequest(data);
+}
+
+async function sendCreateOHRequest(data) {
+    let response = await fetch(
+        `${BACKEND_URL}/createOH`,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(data)
+        }
+    );
+    let result = await response.json();
 }
 
 async function loadTabs() {
@@ -82,8 +133,23 @@ async function loadTabs() {
         console.error("Error adding office hour:", error);
     }
 
+    class_filter = getSelectedTab();
     try {
-        response = await fetch(`${BACKEND_URL}/getTas?class=${DEFAULT_CLASS}`);
+        response = await fetch(`${BACKEND_URL}/getClass?name=${class_filter}`);
+        data = await response.json();
+        if (data.success) {
+            curr_class = data.classes;
+        } else {
+            alert(data.message || "Failed to get class.");
+        }
+    } catch (error) {
+        console.error("Error getting class: ", error);
+    }
+    curr_class = (curr_class[0]['class_id']);
+    console.log(curr_class);
+
+    try {
+        response = await fetch(`${BACKEND_URL}/getTas?class=${curr_class}`);
         data = await response.json();
         taContainer = document.getElementById('taDrop');
         taContainer.innerHTML = '';
@@ -93,9 +159,7 @@ async function loadTabs() {
                     <option value="${ta.username}">${ta.username}</option>
                 `;
                 taContainer.innerHTML += taHTML;
-                //console.log(ta.username);
             });
-            //console.log("Ta added successfully.");
         } else {
             alert(data.message || "Failed to add ta.");
         }
@@ -108,7 +172,8 @@ async function loadTabs() {
 
     feedbacks = {};
     try {
-        response = await fetch(`${BACKEND_URL}/getFeedback?class=${DEFAULT_CLASS}`);
+        if (class_filter == "None") console.log("impossible");
+        response = await fetch(`${BACKEND_URL}/getFeedback?class=${curr_class}`);
         data = await response.json();
         if (data.success) {
             data.fbs.forEach(fb => {
@@ -159,6 +224,9 @@ document.addEventListener("DOMContentLoaded", function () {
     settingsButton.addEventListener("click", function () {
         window.location.href = "adminSettings.html";
     });
+
+    addButton = document.getElementById("createOhBtn");
+    addButton.addEventListener("click", createOfficeHour)
 
     menuBtn = document.getElementById('menuBtn');
     navBar = document.getElementById('navBar');
