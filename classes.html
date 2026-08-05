@@ -15,7 +15,6 @@
 
 <div class="page">
 
-    <!-- Sidebar -->
     <aside class="sidebar">
 
         <div class="menu-icon">
@@ -52,10 +51,8 @@
 
     </aside>
 
-    <!-- Main Content -->
     <main class="content">
 
-        <!-- Top Bar -->
         <div class="top-bar">
 
             <div class="search-bar">
@@ -81,55 +78,53 @@
 
         </div>
 
-        <h1>MY CLASSES</h1>
+        <div class="heading-row">
+            <h1>MY CLASSES</h1>
 
-        <!-- Classes Grid -->
+            <button id="addClassBtn" class="add-class-btn" title="Add a class">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
 
-        <section class="classes-grid">
+        <!-- Shown when there are no classes yet -->
+        <p id="emptyState" class="empty-state hidden">
+            No classes yet.
+        </p>
 
-            <div class="class-card">
-
-                <h2 class="class-title">CS 24000</h2>
-
-                <div class="card-menu">
-
-                    <a href="officeHours.html" class="menu-btn">
-                        Office Hours
-                    </a>
-
-                    <a href="taReviews.html" class="menu-btn">
-                        TA Reviews
-                    </a>
-
-                    <a href="faq.html" class="menu-btn">
-                        FAQ
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="class-card">
-                <button class="open-btn">OPEN</button>
-            </div>
-
-            <div class="class-card"></div>
-
-            <div class="class-card"></div>
-
-            <div class="class-card"></div>
-
-            <div class="class-card"></div>
-
-            <div class="class-card"></div>
-
-            <div class="class-card"></div>
-
+        <section class="classes-grid" id="classesGrid">
         </section>
 
     </main>
 
 </div>
+
+<div id="addClassModal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <h2>Add a Class</h2>
+
+        <label for="classNameInput">Class Name</label>
+        <input type="text" id="classNameInput" placeholder="e.g. CS 24000" maxlength="20">
+
+        <div class="modal-actions">
+            <button id="cancelAddClassBtn" class="modal-btn cancel-btn">Cancel</button>
+            <button id="confirmAddClassBtn" class="modal-btn confirm-btn">Create</button>
+        </div>
+    </div>
+</div>
+
+<template id="classCardTemplate">
+    <div class="class-card">
+        <button class="delete-class-btn" title="Remove class">&times;</button>
+        <h2 class="class-title"></h2>
+        <div class="card-menu">
+            <a class="menu-btn office-hours-link">Office Hours</a>
+            <a class="menu-btn ta-reviews-link">TA Reviews</a>
+            <a class="menu-btn faq-link">FAQ</a>
+        </div>
+    </div>
+</template>
+
+<script src="classes.js"></script>
 
 </body>
 </html>
