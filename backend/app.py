@@ -110,8 +110,9 @@ def handle_reset_password():
 
 @app.route("/queueData", methods=["GET"])
 def get_queue_data():
-    metrics = database.get_wait_data()
-    queue_list = database.get_active_queue()
+    class_id = request.args.get("class_id", 1, type=int)
+    metrics = database.get_wait_data(class_id)
+    queue_list = database.get_active_queue(class_id)
     return jsonify({
         "success": True,
         "studentsInLine": metrics["students_in_line"],
@@ -122,17 +123,17 @@ def get_queue_data():
 @app.route("/removeFromQueue", methods=["DELETE"])
 def remove_from_queue():
     data = request.json
-    queue_number = data.get("queueNumber")
-    rows_deleted = database.remove_from_queue(queue_number)
+    queue_id = data.get("queue_id")
+    rows_deleted = database.remove_from_queue(queue_id)
     if rows_deleted > 0:
         return jsonify({
             "success": True,
-            "message": f"Successfully removed position #{queue_number} from the line."
+            "message": f"Successfully removed."
         })
     else:
         return jsonify({
             "success": False,
-            "message": "Queue position not found or already removed."
+            "message": "Student not found or already removed."
         })
 
 @app.route("/getFaqs", methods=["GET"])
@@ -181,6 +182,14 @@ def remove_faq():
             "success": False,
             "message": "FAQ position not found or already deleted."
         })
+
+@app.route("/getClassHeader", methods=["GET"])
+def get_class_header():
+    class_id = request.args.get("class_id", 1, type=int)
+    class_info = database.get_class_by_id(class_id)
+    if class_info:
+        return jsonify({"success": True, "className": class_info["class_name"]})
+    return jsonify({"success": False, "className": "Class"})
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=False)

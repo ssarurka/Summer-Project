@@ -88,10 +88,13 @@ CREATE TABLE users_ta_reviews (
 
 CREATE TABLE student_help_queue (
     queue_id INT AUTO_INCREMENT PRIMARY KEY,
-    queue_number INT NOT NULL UNIQUE,
     check_in_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    class_id INT NOT NULL,
     student_id INT NOT NULL,
     help_request TEXT NOT NULL,
 
-    FOREIGN KEY(student_id) REFERENCES users(user_id)
+    UNIQUE (student_id, class_id),
+
+    FOREIGN KEY(student_id) REFERENCES users(user_id),
+    FOREIGN KEY(class_id) REFERENCES classes(class_id)
 );

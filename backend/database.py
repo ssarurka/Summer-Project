@@ -4,7 +4,7 @@ import mysql.connector
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="YOUR_MYSQL_PASSWORD_HERE", 
+    password="5k7Bc4fU49Ty$$u", 
     database="office_hour_system_application"
 )
 
@@ -78,10 +78,11 @@ def reset_password(username, password):
     
     return rows_updated
 
-def get_wait_data():
-    cursor = connection.cursor()
+def get_wait_data(class_id=1):
+    cursor = connection.cursor(buffered=True)
     cursor.execute(
-        "SELECT COUNT(*) as total FROM student_help_queue"
+        "SELECT COUNT(*) as total FROM student_help_queue WHERE class_id = %s",
+        (class_id,)
     )
     result = cursor.fetchone()
     student_count = result[0] if result else 0
@@ -96,28 +97,33 @@ def get_wait_data():
         "projected_wait_time": projected_wait_time
     }
 
-def get_active_queue():
-    cursor = connection.cursor(dictionary=True)
+def get_active_queue(class_id=1):
+    cursor = connection.cursor(buffered=True, dictionary=True)
     cursor.execute(
         """
         SELECT 
-            q.queue_number, 
+            q.queue_id, 
             u.username, 
-            q.help_request 
+            q.help_request,
+            q.check_in_time
         FROM student_help_queue q
         JOIN users u ON q.student_id = u.user_id
-        ORDER BY q.queue_number ASC
-        """
+        WHERE q.class_id = %s
+        ORDER BY q.check_in_time ASC
+        """,
+        (class_id,)
     )
     queue_list = cursor.fetchall()
     cursor.close()
+    for index, entry in enumerate(queue_list, start=1):
+        entry["display_number"] = index
     return queue_list
 
-def remove_from_queue(queue_number):
+def remove_from_queue(queue_id):
     cursor = connection.cursor()
     cursor.execute(
-        "DELETE FROM student_help_queue WHERE queue_number = %s",
-        (queue_number,)
+        "DELETE FROM student_help_queue WHERE queue_id = %s",
+        (queue_id,)
     )
     connection.commit()
     rows_deleted = cursor.rowcount
@@ -163,3 +169,10 @@ def remove_faq(faq_id):
     rows_deleted = cursor.rowcount
     cursor.close()
     return rows_deleted
+
+def get_class_by_id(class_id):
+    cursor = connection.cursor(dictionary=True, buffered=True)
+    cursor.execute("SELECT class_name FROM classes WHERE class_id = %s", (class_id,))
+    result = cursor.fetchone()
+    cursor.close()
+    return result

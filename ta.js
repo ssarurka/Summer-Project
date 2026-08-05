@@ -1,5 +1,10 @@
 BACKEND_URL = "http://127.0.0.1:5000";
-async function loadFaqs(classId = 1) {
+function getActiveClassId() {
+    return localStorage.getItem("currentClassId") || 1;
+}
+
+async function loadFaqs() {
+    classId = getActiveClassId();
     recentFaqContainer = document.querySelector(".recent_faq_container");
     if (!recentFaqContainer) return;
     try {
@@ -36,7 +41,7 @@ async function removeFaq(faqId) {
         });
         data = await response.json();
         if (data.success) {
-            loadFaqs(); // Refresh list automatically
+            loadFaqs(); 
         } else {
             alert(data.message || "Failed to remove FAQ.");
         }
@@ -46,7 +51,14 @@ async function removeFaq(faqId) {
 }
 
 async function loadDashboardData() {
-    response = await fetch(`${BACKEND_URL}/queueData`);
+    classId = getActiveClassId();
+    headerResponse = await fetch(`${BACKEND_URL}/getClassHeader?class_id=${classId}`);
+    headerData = await headerResponse.json();
+    headerElem = document.querySelector(".class_header h1");
+    if (headerElem && headerData.success) {
+        headerElem.innerText = `${headerData.className} Office Hours`;
+    }
+    response = await fetch(`${BACKEND_URL}/queueData?class_id=${classId}`);
     data = await response.json();
     if (data.success) {
         document.getElementById("waitTimeValue").innerText = data.projectedWaitTime;
@@ -60,12 +72,12 @@ async function loadDashboardData() {
                 cardHTML = `
                 <div class="line_spot">
                     <div class="line_header">
-                        <span class="line_number">#${item.queue_number}</span>
+                        <span class="line_number">#${item.display_number}</span>
                         <span class="line_name">${item.username}</span>
                     </div>
                     <p class="line_body">${item.help_request}</p>
                     <div class="line_footer">
-                        <button class="remove_btn" onclick="removeStudent(${item.queue_number})">REMOVE</button>
+                        <button class="remove_btn" onclick="removeStudent(${item.queue_id})">REMOVE</button>
                     </div>
                 </div>
                 `;
@@ -73,11 +85,11 @@ async function loadDashboardData() {
         });
     }
 }
-async function removeStudent(queueNumber) {
+async function removeStudent(queueId) {
     const response = await fetch(`${BACKEND_URL}/removeFromQueue`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ queueNumber: queueNumber })
+        body: JSON.stringify({ queue_id: queueId })
     });
     const data = await response.json();
     if (data.success) {
@@ -85,6 +97,12 @@ async function removeStudent(queueNumber) {
     } else {
         alert(data.message);
     }
+}
+
+// CALL WHEN SWICTHING CLASS IN SETTINGS TO UPDATE currentClassId
+function switchClass(classId) {
+    localStorage.setItem("currentClassId", classId);
+    alert(`Switched active class!`);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -130,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        class_id: 1,
+                        class_id: parseInt(getActiveClassId()),
                         post: textValue
                     })
                 });
@@ -164,10 +182,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
-
-
-
-
-
-
